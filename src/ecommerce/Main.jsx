@@ -18,7 +18,7 @@ function Main() {
 
     return (
         <>
-            <Header />
+       
             <div id="products">
                 {products.map((product, index) => {
                     return (

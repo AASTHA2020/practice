@@ -1,19 +1,21 @@
+import { NavLink } from "react-router-dom";
+
 function Header(){
     return (
         <header>
         <h1>Ecommerce</h1>
         <ul>
             <li>
-                <a href="/">HOME</a>
+               <NavLink to = "/">HOME</NavLink>
             </li>
             <li>
-                <a href="/ABOUT">ABOUT</a>
+            <NavLink to = "/">ABOUT</NavLink>
             </li>
             <li>
-                <a href="/BLOG">BLOG</a>
+            <NavLink to = "/">BLOG</NavLink>
             </li>
             <li>
-                <a href="/CONTACT">CONTACT US</a>
+            <NavLink to = "/">CONTACT US</NavLink>
             </li>
         </ul>
         </header>
