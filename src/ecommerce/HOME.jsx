@@ -5,6 +5,8 @@ import ABOUT from './ABOUT';
 import BLOG from './BLOG';
 import CONTACT from './CONTACT';
 import Header from './Header';
+import './Header.css';
+
 
 function HOME() {
   return (
