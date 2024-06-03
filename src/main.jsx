@@ -1,11 +1,14 @@
+// main.jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import TodoList from './TodoList';
+import { createRoot } from 'react-dom/client';
+import './ecommerce/ecommerce.css';
+import HOME from './ecommerce/HOME';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
-    <TodoList />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <HOME />
+  </React.StrictMode>
 );

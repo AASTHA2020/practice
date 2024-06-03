@@ -1,12 +1,14 @@
 import { useState } from "react";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
+import DoneIcon from '@mui/icons-material/Done';
 
 function TodoList() {
-  // State variables to manage input value, list of tasks, and edit index
+  // State variables to manage input value, list of tasks, edit index, and completed tasks
   const [inputValue, setInputValue] = useState("");
   const [tasks, setTasks] = useState([]);
   const [editIndex, setEditIndex] = useState(-1); // Default -1 means no task is being edited
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   // Function to handle form submission
   function handleSubmit(e) {
@@ -45,6 +47,17 @@ function TodoList() {
     setInputValue(tasks[index].task); // Set inputValue to the current task text for editing
   }
 
+  // Function to handle marking a task as completed
+  function handleCompleted(index) {
+    const taskId = tasks[index].id;
+    if (!completedTasks.includes(taskId)) {
+      setCompletedTasks([...completedTasks, taskId]); // Add the taskId to completedTasks if not already completed
+    } else {
+      const newCompletedTasks = completedTasks.filter(id => id !== taskId); // Remove taskId from completedTasks
+      setCompletedTasks(newCompletedTasks);
+    }
+  }
+
   console.log(tasks); // Log the list of tasks to the console for debugging
 
   return (
@@ -61,20 +74,15 @@ function TodoList() {
 
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>
-            {index === editIndex ? (
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)} // Update the input value during editing
-              />
-            ) : (
-              task.task
-            )}
+          <li key={index} style={{ textDecoration: completedTasks.includes(task.id) ? "line-through" : "none" }}>
+            {task.task}
             {/* Delete icon with onClick handler to delete the task */}
-            <DeleteOutlineIcon onClick={() => handleDelete(index)} style={{ cursor: 'pointer' }} />
-            {/* Edit icon with onClick handler to edit the task */}
-            <EditIcon onClick={() => handleEdit(index)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+            <DeleteOutlineIcon onClick={() => handleDelete(index)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+           
+           {completedTasks.includes(task.id) ? ("" ):
+           (<EditIcon onClick={() => handleEdit(index)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+ )}
+            <DoneIcon onClick={() => handleCompleted(index)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
           </li>
         ))}
       </ul>
